@@ -28,6 +28,12 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:timestamp", function (req, res) {  
   // get the date string 
   let timestamp = req.params.timestamp;
+  req.params.timestamp = "";
+  if(timestamp === ""){
+    let d = new Date().toUTCString()
+    res.json({"utc":d})
+  }else{
+
   if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { 
       let d = new Date(timestamp).toUTCString()
       res.json({"utc":d})
@@ -38,7 +44,7 @@ app.get("/api/:timestamp", function (req, res) {
     
   } else{
     res.json({ error : "Invalid Date" })
-  }
+  }}
 });
 
 
