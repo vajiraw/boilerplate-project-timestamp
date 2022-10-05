@@ -37,11 +37,11 @@ app.get("/api/:date", function (req, res) {
         res.json({ error : "Invalid Date" })   
       }
     }else{//valid date return unix      
-        let unix = Math.floor(parseInt(req.params.date)/ 1000)
+        let unix = Math.floor(new Date(req.params.date)/ 1000)
         res.json({"unix":unix})          
     }
 }else{  
-  let unix = Math.floor(parseInt(req.params.date)/ 1000)
+  let unix = Math.floor(new Date(req.params.date)/ 1000)
   res.json({"unix":unix})   
   }  
 });
