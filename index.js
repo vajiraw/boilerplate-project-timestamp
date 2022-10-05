@@ -28,16 +28,14 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:timestamp", function (req, res) {  
   // get the date string 
   let timestamp = req.params.timestamp;
-  if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { // if ####-##-##
-    //return new Date(str);
+  if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { 
       let d = new Date(timestamp).toUTCString()
       res.json({"utc":d})
-  } else if ((/^\d+$/).test(timestamp)) {  // if #######  
-    //return new Date(+str);  // convert string to number
+  } else if ((/^\d+$/).test(timestamp)) { 
     let unix = parseInt(timestamp);
-    let utc =  new Date(timestamp).
-    console.log({ unix: 1451001600000, utc: utc })
-    //console.log('########');
+    let utc =  new Date(unix).toUTCString()
+    res.json({ 'unix': unix, utc: utc })
+    
   } 
 });
 
