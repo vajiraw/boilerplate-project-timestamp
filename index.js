@@ -25,25 +25,19 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date", function (req, res) {  
-  let date = new Date(req.params.date)
-  if(req.params.date !==""){
-    if(date.toString() === 'Invalid Date'){
-      let n = new Number(req.params.date)
-      if(!Number.isNaN(req.params.date)){
-        let utc = new Date(n).toISOString();    
-        res.json({"utc":utc})    
-      }else{
-        res.json({ error : "Invalid Date" })   
-      }
-    }else{//valid date return unix      
-        let unix = Math.floor(new Date(req.params.date)/ 1000)
-        res.json({"unix":unix})          
-    }
-}else{  
-  let unix = Math.floor(new Date(req.params.date)/ 1000)
-  res.json({"unix":unix})   
-  }  
+app.get("/api/:date?", function (req, res) {  
+  // get the date string 
+  let date = req.params.date  
+  let a = new Date(date)
+  if(a){
+    const unix = parseInt(Math.floor(a.getTime() / 1000));
+    res.json({"unix":unix})
+  }else{
+    console.log('else');
+  }
+  
+    //res.json({'a':'a'})
+ 
 });
 
 
