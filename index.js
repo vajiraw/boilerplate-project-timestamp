@@ -1,5 +1,6 @@
 // index.js
 // where your node app starts
+//@ts-check
 
 // init project
 var express = require('express');
@@ -33,31 +34,26 @@ app.get("/api/", function (req, res) {
 });
 
 app.get("/api/:timestamp", function (req, res) {  
-  // get the date string 
+  
   let timestamp = req.params.timestamp;
-  if(new Date(timestamp)!= 'Invalid Date'){
+  if(new Date(timestamp) != 'Invalid Date'){
     let d = new Date(timestamp).toUTCString()
     let unix = new Date(d).valueOf() 
     res.json({"unix":unix,"utc":d})
   }
 
   if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { 
-      let d = new Date(timestamp).toUTCString()
-      let unix = new Date(d).valueOf() 
-      res.json({"unix":unix,"utc":d})
+    let d = new Date(timestamp).toUTCString()
+    let unix = new Date(d).valueOf() 
+    res.json({"unix":unix,"utc":d})
   } else if ((/^\d+$/).test(timestamp)) { 
     let unix = parseInt(timestamp);
     let utc =  new Date(unix).toUTCString()
-    res.json({ 'unix': unix, utc: utc })
-    
+    res.json({ 'unix': unix, utc: utc })    
   } else{
     res.json({ error : "Invalid Date" })
   }
 })
-
-
-
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
