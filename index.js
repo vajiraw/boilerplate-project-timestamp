@@ -28,10 +28,10 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:timestamp", function (req, res) {  
   // get the date string 
   let timestamp = req.params.timestamp;
-  req.params.timestamp = "";
-  if(timestamp === ""){
+    if(timestamp === ""){
     let d = new Date().toUTCString()
-    res.json({"utc":d})
+    let m =  new Date(d).valueOf();
+    res.json({"utc":d,'unix':m})
   }else{
 
   if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { 
