@@ -25,18 +25,21 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date?", function (req, res) {  
+app.get("/api/timeStamp", function (req, res) {  
   // get the date string 
-  let date = req.params.date  
-  let a = new Date(date)
-  if(a){
-    const unix = parseInt(Math.floor(a.getTime() / 1000));
-    res.json({"unix":unix})
-  }else{
-    console.log('else');
+  let time = new Date().toISOString()
+  let unix = new Date().getTime()
+  res.json({'utc':time,'unix':unix})
+ 
+});
+
+
+app.get("/api/timeStamp/:date?", function (req, res) {  
+  // get the date string 
+  let inputDate = req.params.date  
+  if(req.params.date==""){
+
   }
-  
-    //res.json({'a':'a'})
  
 });
 
