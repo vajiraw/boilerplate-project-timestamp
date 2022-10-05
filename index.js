@@ -31,7 +31,7 @@ app.get("/api/:timestamp", function (req, res) {
   if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { // if ####-##-##
     //return new Date(str);
       let d = new Date(timestamp).toUTCString()
-      res.json("utc":d)
+      res.json({"utc":d})
   } else if ((/^\d+$/).test(timestamp)) {  // if #######  
     //return new Date(+str);  // convert string to number
     let unix = parseInt(timestamp);
