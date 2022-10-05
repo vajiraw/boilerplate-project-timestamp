@@ -31,12 +31,13 @@ app.get("/api/:timestamp", function (req, res) {
     if(timestamp === ""){
     let d = new Date().toUTCString()
     let m =  new Date(d).valueOf();
-    res.json({"utc":d,'unix':m})
+    res.json({"utc":d,'unix':parseInt(m)})
   }else{
 
   if ((/\d{4}-\d{2}-\d{2}/).test(timestamp)) { 
       let d = new Date(timestamp).toUTCString()
-      res.json({"utc":d})
+      let unix = parseInt(d.valueOf())
+      res.json({"utc":d,"unix":unix})
   } else if ((/^\d+$/).test(timestamp)) { 
     let unix = parseInt(timestamp);
     let utc =  new Date(unix).toUTCString()
